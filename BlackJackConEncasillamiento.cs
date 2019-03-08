@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,15 +22,15 @@ namespace Blackjack_con_encasillamiento
 
             int n = int.Parse(Console.ReadLine());
 
-            int [] jugador = new int[n];
-            int [] puntaje = new int[n];
+            int[] jugador = new int[n];
+            int[] puntaje = new int[n];
 
             for (int i = 0; i < n; i += 1)
             {
                 jugadores += 1;
                 jugador[i] = jugadores;
                 Console.WriteLine("Jugador " + jugador[i]);
-                
+
 
                 carta1 = aleatorio.Next(1, 11);
                 carta2 = aleatorio.Next(1, 11);
@@ -44,7 +44,7 @@ namespace Blackjack_con_encasillamiento
                 Console.WriteLine("Desea continuar? (s/n)");
                 string respuesta = Console.ReadLine();
 
-                while(respuesta == "s" && total < 21)
+                while (respuesta == "s" && total < 21)
                 {
                     carta1 = aleatorio.Next(1, 11);
                     total += carta1;
@@ -57,7 +57,7 @@ namespace Blackjack_con_encasillamiento
                     {
                         Console.WriteLine("Desea continuar? (s/n)");
                         respuesta = Console.ReadLine();
-                        
+
                     }
                     if (total == 21)
                     {
@@ -68,8 +68,10 @@ namespace Blackjack_con_encasillamiento
                     {
                         Console.WriteLine("Eliminado");
                         puntaje[i] = 0;
+                        max = 0;
+                        total = 0;
                     }
-                    
+                    puntaje[i] = total;
                 }
                 if (puntaje[i] > max)
                 {
@@ -78,8 +80,8 @@ namespace Blackjack_con_encasillamiento
                 }
             }
 
-      
-                Console.WriteLine("Gracias por JUGAR");
+
+            Console.WriteLine("Gracias por JUGAR");
             Console.Write("el ganador es " + jugador[indice] + " con " + max);
         }
     }
