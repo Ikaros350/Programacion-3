@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +19,7 @@ namespace Blackjack_con_encasillamiento
             int max = 0;
             int tem = 0;
             string tem2 = "";
-            
+
 
             Console.Write("Ingresar la cantidad de judadores ");
 
@@ -82,28 +82,34 @@ namespace Blackjack_con_encasillamiento
                     max = puntaje[i];
                     indice = i;
                 }
-            } 
-           
 
-            for (int i = 0; i < n-1; i += 1)
-            {
-                if (puntaje[i] < puntaje[i + 1])
-                {
-                    tem = puntaje[i];
-                    puntaje[i] = puntaje[i + 1];
-                    puntaje[i+1] = tem;
-
-                    
-                    tem2 = nombre[i];
-                    nombre[i] = nombre[i + 1];
-                    nombre[i + 1] = tem2;
-                }
-                
             }
+            for (int j = 0; j < n - 1; j += 1)
+            {
+                for (int i = 0; i < n - 1; i += 1)
+                {
+                    if (puntaje[i] < puntaje[i + 1])
+                    {
+                        tem = puntaje[i];
+                        puntaje[i] = puntaje[i + 1];
+                        puntaje[i + 1] = tem;
+
+
+                        tem2 = nombre[i];
+                        nombre[i] = nombre[i + 1];
+                        nombre[i + 1] = tem2;
+                    }
+
+                }
+
+            }
+
+
             for (int i = 0; i < n; i += 1)
             {
-                Console.WriteLine("Puntaje " + puntaje[i]);
+
                 Console.WriteLine("Nombre " + nombre[i]);
+                Console.WriteLine("Puntaje " + puntaje[i]);
             }
 
             Console.WriteLine("Gracias por JUGAR");
