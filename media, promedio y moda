@@ -1,0 +1,135 @@
+using System;
+
+namespace ConsoleApp2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int cont = 1;
+            //Generador Aleatorio de Datos
+            //--------------------------------------
+            Random aleatorio = new Random();
+            int tamaño = aleatorio.Next(5, 11);
+            int[] datos = new int[tamaño];
+            Console.WriteLine("Datos:");
+            for (int i = 0; i < datos.Length; i += 1)
+            {
+                datos[i] = aleatorio.Next(5, 11);
+                Console.WriteLine(datos[i]);
+            }
+            //--------------------------------------
+
+            //Hallar Promedio
+            //--------------------------------------
+            int total = 0;
+            for (int i = 0; i < datos.Length; i += 1) //Sumar los datos del numerador
+            {
+                total += datos[i];
+            }
+            double promedio = (double)(total) / (double)(datos.Length); //Dividir la suma de los datos entre el numero de datos
+            Console.WriteLine("El Promedio es: " + promedio); //Escribir el promedio
+            //--------------------------------------
+
+            //Hallar Moda
+            //--------------------------------------
+            for (int j = 0; j < datos.Length - 1; j += 1) //Organizar Datos de mayor a menor
+            {
+                for (int i = 0; i < datos.Length - 1; i += 1)
+                {
+                    if (datos[i] < datos[i + 1])
+                    {
+                        int p = datos[i];
+                        datos[i] = datos[i + 1];
+                        datos[i + 1] = p;
+                    }
+                }
+            }
+            Console.WriteLine("Datos Organizados:"); //Escribir Dayos organizados
+            for (int i = 0; i < datos.Length; i += 1)
+            {
+                Console.WriteLine(datos[i]);
+            }
+            for (int i = 0; i < datos.Length - 1; i += 1) //Contar numero de Datos sin Repetir
+            {
+                if (datos[i] != datos[i + 1])
+                {
+                        cont += 1;
+                }
+            }
+            int[] DatosSinRepetir = new int[cont]; //Declarar Arreglos para guardar los datos sin repetir y el numero de repeticiones por dato
+            int[] Repeticiones = new int[cont];
+            cont = 0;
+            for (int i = 0; i < datos.Length - 1; i += 1) //Guardar los datos sin repetir en el arreglo
+            {
+                if (datos[i] != datos[i + 1])
+                {
+                    DatosSinRepetir[cont] = datos[i];
+                    DatosSinRepetir[cont + 1] = datos[i + 1];
+                    cont += 1;
+                }
+            }
+            Console.WriteLine("Datos Sin Repetir:"); //Escribir datos sin Repetir
+            for (int i = 0; i < DatosSinRepetir.Length; i += 1)
+            {
+                Console.WriteLine(DatosSinRepetir[i]);
+            }
+            for (int i = 0; i < DatosSinRepetir.Length; i += 1) //Guardar numero de Repeticiones en el arreglo
+            {
+                cont = 0;
+                for (int j = 0; j < datos.Length; j += 1)
+                {
+                    if(DatosSinRepetir[i] == datos[j])
+                    {
+                        cont += 1;
+                    }
+                }
+                Repeticiones[i] = cont;
+            }
+            Console.WriteLine("Numero de Repeticiones:"); //Escribir numero de Repeticiones
+            for (int i = 0; i < Repeticiones.Length; i += 1)
+            {
+                Console.WriteLine(Repeticiones[i]);
+            }
+            for (int i = 0; i < Repeticiones.Length - 1; i += 1) //organizar las repeticiones de mayor a menor y sus respectivos datos (Si una repeticion cambai de lugar el dato al cual corresponde tambien)
+            {
+                for(int j = 0; j < Repeticiones.Length - 1; j += 1)
+                {
+                    if(Repeticiones[i] < Repeticiones[i + 1])
+                    {
+                        int tmp = Repeticiones[i];
+                        Repeticiones[i] = Repeticiones[i + 1];
+                        Repeticiones[i + 1] = tmp;
+                        tmp = DatosSinRepetir[i];
+                        DatosSinRepetir[i] = DatosSinRepetir[i + 1];
+                        DatosSinRepetir[i + 1] = tmp;
+                    }
+                }
+            }
+            Console.WriteLine("La moda es " + DatosSinRepetir[0] + " y se repite " + Repeticiones[0] + " veces en los datos"); //Escribir el dato que se repite mas y el numero de veces que se repite
+            //--------------------------------------
+
+            //Hallar Mediana
+            //--------------------------------------
+            for (int i = 0; i < datos.Length; i++)
+            {
+                Console.WriteLine(datos[i]);
+            }
+            if (datos.Length % 2 == 0) //Hallar el dato de la mitad si el numero de datos es par
+            {
+                Console.WriteLine("la mediana es ");
+                int b = ((datos.Length) / 2);
+                double c = ((datos[b - 1] + datos[b]) / 2);
+                Console.WriteLine(c);
+            }
+            else //Hallar el dato de la mitad si el numeo es impar
+            {
+                Console.WriteLine("la mediana es ");
+                int a = ((datos.Length + 1) / 2);
+                Console.WriteLine(datos[a - 1]);
+            }
+            //--------------------------------------
+
+        }
+    }
+}
